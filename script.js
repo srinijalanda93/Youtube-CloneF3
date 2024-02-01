@@ -1,45 +1,60 @@
-const API_KEY = "AIzaSyDI7xuxOTRzMaDfaecSlpFJfHOKQV04dnk";
+const API_KEY = "AIzaSyDZTQW9azQgJzyp-Q4ALmFl0-QYYEF2JSE";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
-/*
-//http://127.0.0.1:5500/index.html?name1=srinija&age=22
-console.log(window.location.href); //give the reference
-let params=new URLSearchParams(window.location.search);
-console.log(params.get("name1") ,params.get("age"));
-*/
+window.addEventListener("DOMContentLoaded", () => {
+    //when it DOM loades we are fetching the video of "learn js of max =10 videos"
+    fetchVideos("Learn JS", 10);
+});
 
-//display Videos used to display Video from Query using snipnet.title,snippnet.idVideo
-
-function displayVideos(videos) {
-    document.getElementById("videos-container").innerHTML = "";
-    //here the videos are array
-    videos.map((video, i) => {
-      //get the videoId of each Video
-      //console.log(video.id.videoId);
-      document.getElementById("videos-container").innerHTML += `
-      <a href='/video.html?id=${video.id.videoId}'>
-         <li>
-         <img src=${video.snippet.thumbnails.high.url}>
-         <p>${video.snippet.title}</p>
-         </li>
-         </a> `;
-    });
-  }
-  
-//to get the videos use the API call
+//using async await function here fetchVideos is used to get the videos
+async function fetchVideos(searchQuery, maxResults) {
+    const response = await fetch(
+        `${BASE_URL}/search?key=${API_KEY}&q=${searchQuery}&maxResults=${maxResults}&part=snippet`
+    );
+    const data = await response.json();
+    displayVideos(data.items);
+}
+//let create a getVideo function where it takes  query by the input onclick on the button it will display
 function getVideo(query) {
-  fetch(`${BASE_URL}/search?key=${API_KEY}&q=${query}&type=video&part=snippet&maxResults=10`)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      console.log(data.items); //video array passed to displayVideos
-      displayVideos(data.items);
+    fetch(`${BASE_URL}/search?key=${API_KEY}&q=${query}&type=video&part=snippet&maxResults=20`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+       // console.log(data.items); //video array passed to displayVideos
+        displayVideos(data.items);
+      });
+  }
+  document.getElementById("search-btn").addEventListener("click", () => {
+    const searchInput = document.getElementById("search-input").value;
+    getVideo(searchInput);
+  });
+
+
+  /**
+   * here in displayVideo used take data.items= video array
+   * using forEach (e,i,arr) e=video feteching videoId,title,image wrap inside <a></a>
+   * create a div assign the className(videoCard) append to the div#video-gallery
+   * onclick on the img redirect to other(video.html) using videoId plays the video
+   */
+function displayVideos(videos) {
+    const container = document.getElementById("video-gallery");
+    container.innerHTML = '';
+
+    videos.forEach(video => {
+        const videoId = video.id.videoId;
+        const title = video.snippet.title;
+        const thumbnail = video.snippet.thumbnails.high.url;
+
+        const videoCard = document.createElement('div');
+        videoCard.className = 'video-card';
+        videoCard.innerHTML = `
+            <a href="video.html?videoId=${videoId}">
+                <img src="${thumbnail}" alt="${title}">
+                <h3>${title}</h3>
+            </a>
+        `;
+        container.appendChild(videoCard);
     });
 }
-getVideo("");
-document.getElementById("search-btn").addEventListener("click", () => {
-  const searchInput = document.getElementById("search-input").value;
-  getVideo(searchInput);
-});
