@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyDZTQW9azQgJzyp-Q4ALmFl0-QYYEF2JSE";
+const API_KEY = "AIzaSyAjQfACD3zg-DbB1bRgavi8xmhAcVKD1-c";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 /**
  * from the video.html we need to fetch/get the query parameter of ?videoId=idno

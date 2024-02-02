@@ -11,7 +11,7 @@ header {
   background-color: #212121;
   height: 10vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
 }
@@ -45,6 +45,15 @@ header > #input-div > div {
   padding: 8px;
   border-radius: 40px;
 }
+header>div:nth-child(1){
+  margin-left: 30px;
+}
+header>div:nth-child(3){
+  margin-right: 30px;
+}
+header>div:nth-child(3)>img{
+  margin-inline: 6px;
+}
 /* header part end */
 /* section of col1 col2 start*/
 .sec-container {
@@ -57,6 +66,25 @@ header > #input-div > div {
   width: 15vw;
   background-color: #212121; /* for example */
 }
+/* .column1>.pc1{
+
+} */
+.column1>.pc1 >ul>li{
+  list-style-type: none;
+  color:white;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  padding-block: 6px;
+  justify-content: center;
+}
+.column1>.pc1{
+  margin-block-end: 5px;
+
+  border-bottom: 0.1px ridge #303030;
+  
+}
+
 /* col1 end*/
 
 /* col2 start*/
