@@ -4,13 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mini YouTube Clone</title>
+    <link rel="icon" href="./assets/yt.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Home</h1>
-    <input type="text" id="search-input"/>
-    <button type="button" id="search-btn">Search</button>
-    <div id="video-gallery"></div>
+    <header>
+        <div id="input-div">
+            <input type="text" id="search-input" />
+            <img src="./assets/search1.svg" alt="search">
+            <div><img src="./assets/mic.svg" alt="mic"></div>
+        </div>    
+    </header>
+    <section class="sec-container">
+      <div class="column1">Column 1</div>
+      <div class="column2">
+        <div id="video-gallery"></div>
+      </div>
+    </section>
     <script src="script.js"></script>
   </body>
 </html>

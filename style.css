@@ -1,35 +1,109 @@
-body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f0f0f0;
-  }
-  
-  #video-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .video-card {
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: #fff;
-  }
-  
-  .video-card img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .video-card h3 {
-    font-size: 16px;
-    margin: 10px;
-  }
-  
-  .video-card p {
-    font-size: 14px;
-    color: #666;
-    margin: 0 10px 10px 10px;
-  }
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0px;
+  margin: 0px;
+  /* color:white; */
+}
+/* header part start */
+header {
+  position:sticky;
+  top:0px;
+  background-color: #212121;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+header > #input-div {
+  /* padding-inline:5px; */
+  display: flex;
+  align-items: center;
+  width: 340px;
+  height: 40px;
+  background-color: #303030;
+}
+header > #input-div > input {
+  font-size: 20px;
+  color:white;
+  background-color: #121212;
+  width: 262px;
+  height: 40px;
+  border-radius: 2px;
+  border: none;
+}
+header > #input-div> img{
+padding-inline:5px
+}
+header > #input-div > div {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #000000;
+  padding: 8px;
+  border-radius: 40px;
+}
+/* header part end */
+/* section of col1 col2 start*/
+.sec-container {
+  display: flex;
+  /* height: 90vh; */
+}
+/* section of col1 col2 end*/
+/* col1 start*/
+.column1 {
+  width: 15vw;
+  background-color: #212121; /* for example */
+}
+/* col1 end*/
+
+/* col2 start*/
+.column2 {
+  flex: 1;
+  background-color:#000000; /* for example */
+}
+#video-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+a{
+  text-decoration: none;
+}
+.video-card {
+  width: 300px;
+  /* border: 0.1px solid #ddd; */
+  border-radius: 5px;
+  overflow: hidden;
+  /* background-color: #d47f7f; */
+}
+
+.video-card>a>img:first-child {
+  width: 100%;
+  height: auto;
+}
+.channel-div >span{
+  padding-left:10px
+}
+.channel-div h3 {
+  font-size: 13px;
+  color:white;
+}
+.channel-div {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  margin:auto
+}
+.channel-div img{
+  width:15%;
+  height: 15%;
+  border-radius: 50%;
+}
+.video-card>a>.channel-div p {
+  font-size: 14px;
+  color:white;
+  margin: 0px;
+}

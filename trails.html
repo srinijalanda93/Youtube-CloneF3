@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<div id="input-div">
+    <input type="text" id="search-input" />
+</div>
+<script>
+const searchInput = document.getElementById('search-input');
+
+searchInput.addEventListener('keypress', function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        search();
+    }
+});
+
+function search() {
+    const searchTerm = searchInput.value;
+    // Add your search logic here
+    const Input = document.getElementById('input-div');
+    Input.innerHTML+=`<p>${searchTerm}</p>`
+    console.log('Searching for:', searchTerm);
+}</script>
+
+</body>
+</html>
