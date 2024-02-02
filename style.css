@@ -65,6 +65,11 @@ header>div:nth-child(3)>img{
 .column1 {
   width: 15vw;
   background-color: #212121; /* for example */
+  overflow-y: auto; /* Enable vertical scrollbar */
+  max-height: 90vh; /* Set maximum height for scrolling */
+}
+.column1::-webkit-scrollbar {
+  width: 0;
 }
 /* .column1>.pc1{
 
@@ -75,14 +80,15 @@ header>div:nth-child(3)>img{
   display:flex;
   flex-direction: row;
   align-items: center;
-  padding-block: 6px;
+  padding-block: 10.7px;
   justify-content: center;
+  font-size: 17px;
+  padding-right: 10px;
+
 }
 .column1>.pc1{
-  margin-block-end: 5px;
-
+  margin-block-end:7px;
   border-bottom: 0.1px ridge #303030;
-  
 }
 
 /* col1 end*/
@@ -91,6 +97,11 @@ header>div:nth-child(3)>img{
 .column2 {
   flex: 1;
   background-color:#000000; /* for example */
+  overflow-y: auto; /* Enable vertical scrollbar */
+  max-height: 90vh; /* Set maximum height for scrolling */
+}
+.column2::-webkit-scrollbar {
+  width: 0;
 }
 #video-gallery {
   display: flex;
