@@ -1,4 +1,8 @@
-const API_KEY = "AIzaSyCCWwPLs-Wp05YVEnGHukkLrNA2YmthzaU";
+// const API_KEY = "AIzaSyCCWwPLs-Wp05YVEnGHukkLrNA2YmthzaU";
+// const API_KEY="AIzaSyAo7626fi4DK5OsZN8_nVm0G12CwtmPBzA";
+// const API_KEY = "AIzaSyAT_bd6XUSKbtz0x4vVrGha688NcedYybk";
+const API_KEY = "AIzaSyDI7xuxOTRzMaDfaecSlpFJfHOKQV04dnk";
+
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
 window.addEventListener("DOMContentLoaded", () => {

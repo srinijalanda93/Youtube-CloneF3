@@ -1,4 +1,7 @@
-const API_KEY = "AIzaSyCCWwPLs-Wp05YVEnGHukkLrNA2YmthzaU";
+// const API_KEY = "AIzaSyAT_bd6XUSKbtz0x4vVrGha688NcedYybk";
+// const API_KEY="AIzaSyAo7626fi4DK5OsZN8_nVm0G12CwtmPBzA";
+const API_KEY = "AIzaSyDI7xuxOTRzMaDfaecSlpFJfHOKQV04dnk";
+
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 /**
  * from the video.html we need to fetch/get the query parameter of ?videoId=idno
@@ -121,6 +124,8 @@ async function loadVideoStats(videoId){
     }
 
 }
+
+
 function getVideoStats(ArrayStat) {
     const displayViewsDiv= document.getElementById('display-views');
     displayViewsDiv.innerHTML +=`
@@ -182,7 +187,7 @@ async function loadComments(videoId) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-     //   console.log("comments", data)
+        console.log("comments", data)
         if (data.items) {
             //call the function to display the commets
             displayComments(data.items);
@@ -196,15 +201,40 @@ async function loadComments(videoId) {
 
 
 function displayComments(comments) {
+   const h1= document.getElementById("Comments")
+   h1.textContent=comments.length+" Comments"
     const commentSection = document.getElementById('comment-section');
-    commentSection.innerHTML = '';
 
-    comments.forEach(comment => {
-        const commentText = comment.snippet.topLevelComment.snippet.textDisplay;
-        const commentElement = document.createElement('p');
-        commentElement.innerHTML = commentText;
-        commentSection.appendChild(commentElement);
-    });
+    // commentSection.innerHTML = '';
+    // comments.forEach(comment => {
+    //     const commentText = comment.snippet.topLevelComment.snippet.textDisplay;
+    //     const commentElement = document.createElement('p');
+    //     commentElement.innerHTML = commentText;
+    //     commentSection.appendChild(commentElement);
+    // });
+    
+
+    console.log("the comment person info:",comments);
+    comments.forEach((commentE) =>{
+        commentSection.innerHTML+=`<div id="comment-section1">
+        <div class="row1">
+        <img src="${commentE.snippet.topLevelComment.snippet.authorProfileImageUrl}" alt="${commentE.id}" >
+        <span><p>${commentE.snippet.topLevelComment.snippet.authorDisplayName}</p>
+        <p>${commentE.snippet.topLevelComment.snippet.textDisplay}</p></span>
+        </div>
+        <div class="row2">
+        
+        <span>${commentE.snippet.topLevelComment.snippet.likeCount}</span>
+        <img src="./assets/like.svg" alt="like">
+        <img src="./assets/dislike.svg" alt="dislike">
+        <p>Reply count:${commentE.snippet.totalRelyCount}</p></div>
+       </div>`
+    })
+    // console.log("profileURL:",commentE.snippet.topLevelComment.snippet.authorProfileImageUrl);
+    // console.log("profileName:",comments[0].snippet.topLevelComment.snippet.authorDisplayName);
+    // console.log("the person comments:",comments[0].snippet.topLevelComment.snippet.textDisplay);
+    // console.log("the person like the comments:",comments[0].snippet.topLevelComment.snippet.likeCount);
+    // console.log("the no of people replied that person comments:",comments[0].snippet.totalRelyCount);
 }
 
 
