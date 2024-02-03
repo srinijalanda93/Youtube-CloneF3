@@ -1,15 +1,86 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f0f0f0;
-  }
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0px;
+  margin: 0px;
+  /* color:white;
+  background-color: black; */
+}
   
   #video-container {
-    max-width: 1000px;
-    margin: auto;
+    max-width: 700px;
+    margin-top: 20px;
+    margin-left:40px;
+    border:none;
+    border-radius:0.1px;
   }
-  
+  #display-views{
+    margin-left:40px;
+    max-width: 700px;
+    border-bottom:3px solid red;
+  }
+  #display-views h1{
+    font-size: 25px;
+    line-height: 21px;
+    text-align: left;
+    margin-block: 7px;
+  }
+  #display-views>span{
+    display:flex;
+    margin-block: 7px;
+    font-size:19px;
+    font-weight:600;
+    color: #AAAAAA;
+    align-items: center; 
+    justify-content: space-between;
+  }
+
+  #display-views>span>p {
+    display: flex;
+    align-items: center;
+    margin-top:0px
+  }
+
+  #channel-info{
+    margin-top: 10px;
+    margin-left:40px;
+    max-width: 700px;
+    max-height:400px;
+    background-color: aqua;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline:3px;
+    box-sizing: border-box;
+  }
+  #channel-info>div:nth-child(1){
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #channel-info>div:nth-child(1)>img{
+    border-radius: 50px;
+    width:60px;
+    height: 60px;
+    padding-right: 5px;
+  }#channel-info>div:nth-child(1) p{
+    font-size: 16x;
+  }
+  #channel-info>div:nth-child(2)>button{
+    background-color: #CC0000;
+    border:none;
+    color:white;
+    font-weight: 700;
+    font-size: 16px;
+    padding:10px;
+    border-radius:3px;
+   
+  }
+  #channel-info-toggle{
+    max-width: 700px;
+    margin-left:40px;
+    background-color: antiquewhite;
+  }
   #comment-section {
     max-width: 1000px;
     margin: 20px auto;

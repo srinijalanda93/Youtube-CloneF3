@@ -4,15 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Video</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./video.css" />
+   
   </head>
   <body>
-    <header>  
+    <header>
+      <div>
+        <img src="./assets/hamburger.svg">
+        <img src="./assets/Youtube-Logo.svg" alt="Youtube-Logo">
+    </div>
+    <div id="input-div">
+        <input type="text" id="search-input" placeholder="Search">
+        <img src="./assets/search1.svg" alt="search">
+        <div><img src="./assets/mic.svg" alt="mic"></div>
+    </div> 
+    <div>
+        <img src="./assets/headerdiv31.svg" alt="headerdiv31">
+        <img src="./assets/headerdiv32.svg" alt="headerdiv32">
+        <img src="./assets/headerdiv33.svg" alt="headerdiv33">
+        <img src="./assets/headerdiv34.svg" alt="headerdiv34">
+    </div>    
     </header>
     <div id="video-container"></div>
-    <div id="channel-info"></div>
-
+    <div id="display-views"></div>
+    <div id="channel-info">
+    </div>
+    <div id="channel-info-toggle">
+    </div>
     <div id="comment-section">
       <h2>Comments</h2>
       <!-- Comments will be loaded here -->
@@ -22,7 +41,7 @@
       <h2>Recommended Videos</h2>
       <!-- Recommended videos will be loaded here -->
     </div>
-    <script src="./header.js"></script>
+    
     <!-- this cdn is defining YT class -->
     <!-- this YT class needs a divID to render video player iframe-->
     <script src="https://www.youtube.com/iframe_api"></script>

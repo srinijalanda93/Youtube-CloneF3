@@ -1,9 +1,9 @@
-const API_KEY = "AIzaSyBmOfUnRNYc22e04ZmK79uRbPb6388K9AE";
+const API_KEY = "AIzaSyCCWwPLs-Wp05YVEnGHukkLrNA2YmthzaU";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
 window.addEventListener("DOMContentLoaded", () => {
     //when it DOM loades we are fetching the video of "learn js of max =10 videos"
-    fetchVideos("Learn JS", 21);
+    fetchVideos("Learn Java", 21);
 });
 
 //using async await function here fetchVideos is used to get the videos
@@ -48,7 +48,7 @@ async function fetchChannelData(channelId) {
         let ArrayChannel=[];
         if (response.ok) {
             const dataOfChannel = await response.json();
-            console.log("channel data", dataOfChannel);
+            //console.log("channel data", dataOfChannel);
             //channelImg
              //console.log(dataOfChannel.items[0].snippet.thumbnails.high.url);
              //channelImg,channelPub in the array
@@ -87,6 +87,7 @@ async function displayVideos(videos) {
         // Use await to get the resolved value of fetchChannelData
        const channelArray = await fetchChannelData(channelId);
 
+       console.log("the video_id",video.id.videoId);
         const videoCard = document.createElement('div');
         videoCard.className = 'video-card';
         videoCard.innerHTML = `
