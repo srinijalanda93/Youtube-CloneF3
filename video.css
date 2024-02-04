@@ -159,7 +159,9 @@ text-align: left;
   display: flex;
   align-items: center;
 }
-
+#recommended-videos>div:first-child{
+  display: none;
+}
 #recommended-videos img {
   width: 120px;
   height: 90px;

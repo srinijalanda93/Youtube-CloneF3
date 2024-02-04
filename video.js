@@ -1,7 +1,7 @@
 // const API_KEY = "AIzaSyAT_bd6XUSKbtz0x4vVrGha688NcedYybk";
 // const API_KEY="AIzaSyAo7626fi4DK5OsZN8_nVm0G12CwtmPBzA";
 const API_KEY = "AIzaSyDI7xuxOTRzMaDfaecSlpFJfHOKQV04dnk";
-
+// const API_KEY = "AIzaSyCCWwPLs-Wp05YVEnGHukkLrNA2YmthzaU";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 /**
  * from the video.html we need to fetch/get the query parameter of ?videoId=idno
@@ -65,13 +65,14 @@ async function loadChannelInfo(channelId) {
         }
         const data = await response.json();
         const dataSub=await responseSub.json();
-        console.log("fetch the Sub data:",dataSub);
-        //console.log("fetch the channel data:",data);
+       // console.log("fetch the Subscribe data:",dataSub);
+        console.log("fetch the channel data:",data);
         if (data.items && dataSub.items) {
             //call the function to display the data
             displayChannelInfo(data.items[0],dataSub.items[0]);
-            loadRecommendedVideos(data.items[0].snippet.title);
-
+            console.log("the loadRecommended Videos:",data.items[0].snippet.title)
+          // loadRecommendedVideos(data.items[0].snippet.title);
+           loadRecommendedVideos(data.items[0].snippet.title,channelId);
         }
        
     } catch (error) {
@@ -141,7 +142,6 @@ function getVideoStats(ArrayStat) {
     ` 
 }
 
-
 function formatSubscriberCount(subscriberCount) {
     const num = parseFloat(subscriberCount);
     
@@ -179,7 +179,6 @@ function displayChannelInfo(channelData, subscriptionData) {
 }
 
 
-
 async function loadComments(videoId) {
     try {
         const response = await fetch(`${BASE_URL}/commentThreads?key=${API_KEY}&videoId=${videoId}&maxResults=25&part=snippet`);
@@ -204,16 +203,6 @@ function displayComments(comments) {
    const h1= document.getElementById("Comments")
    h1.textContent=comments.length+" Comments"
     const commentSection = document.getElementById('comment-section');
-
-    // commentSection.innerHTML = '';
-    // comments.forEach(comment => {
-    //     const commentText = comment.snippet.topLevelComment.snippet.textDisplay;
-    //     const commentElement = document.createElement('p');
-    //     commentElement.innerHTML = commentText;
-    //     commentSection.appendChild(commentElement);
-    // });
-    
-
     console.log("the comment person info:",comments);
     comments.forEach((commentE) =>{
         commentSection.innerHTML+=`<div id="comment-section1">
@@ -238,17 +227,18 @@ function displayComments(comments) {
 }
 
 
-
-
-
-async function loadRecommendedVideos(channelName) {
+async function loadRecommendedVideos(channelName,channelId) {
     try {
-        const response = await fetch(`${BASE_URL}/search?key=${API_KEY}&maxResults=10&part=snippet&q=${channelName}`);
-        if (!response.ok) {
+        const response = await fetch(`${BASE_URL}/search?key=${API_KEY}&maxResults=20&part=snippet&q=${channelName}`);
+        const response2 = await fetch(`${BASE_URL}/channels?key=${API_KEY}&part=snippet&id=${channelId}`);
+        if (!(response.ok && response2.ok) ) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-       // console.log("Recommended videos", data)
+       const data2=await response2.json();
+
+       console.log("Recommended videos", data)
+       console.log("channel data :", data2)
         if (data.items) {
             //call used to display the recommededVideos
             displayRecommendedVideos(data.items);
