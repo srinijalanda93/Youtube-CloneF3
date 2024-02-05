@@ -188,7 +188,7 @@ function displayChannelInfo(channelData, subscriptionData) {
 async function loadComments(videoId) {
   try {
     const response = await fetch(
-      `${BASE_URL}/commentThreads?key=${API_KEY}&videoId=${videoId}&maxResults=25&part=snippet`
+      `${BASE_URL}/commentThreads?key=${API_KEY}&videoId=${videoId}&maxResults=36&part=snippet`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -219,12 +219,12 @@ function displayComments(comments) {
         <p>${commentE.snippet.topLevelComment.snippet.textDisplay}</p></span>
         </div>
         <div class="row2">
-        
         <span>${commentE.snippet.topLevelComment.snippet.likeCount}</span>
         <img src="./assets/like.svg" alt="like">
         <img src="./assets/dislike.svg" alt="dislike">
-        <p>Reply count:${commentE.snippet.totalRelyCount}</p></div>
+        <p>Rely ${commentE.snippet.totalReplyCount}</p></div>
        </div>`;
+    //console.log("the reply:",commentE.snippet.totalReplyCount);
   });
   // console.log("profileURL:",commentE.snippet.topLevelComment.snippet.authorProfileImageUrl);
   // console.log("profileName:",comments[0].snippet.topLevelComment.snippet.authorDisplayName);
