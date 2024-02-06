@@ -90,6 +90,9 @@ header>div:nth-child(3)>img{
   margin-block-end:7px;
   border-bottom: 0.1px ridge #303030;
 }
+.column1>.pc1:last-child{
+  border:1px solid red;
+}
 
 /* col1 end*/
 

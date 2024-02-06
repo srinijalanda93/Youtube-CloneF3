@@ -1,7 +1,7 @@
 // const API_KEY = "AIzaSyAT_bd6XUSKbtz0x4vVrGha688NcedYybk";
 // const API_KEY="AIzaSyAo7626fi4DK5OsZN8_nVm0G12CwtmPBzA";
 // const API_KEY = "AIzaSyDI7xuxOTRzMaDfaecSlpFJfHOKQV04dnk";
-const API_KEY = "AIzaSyCCWwPLs-Wp05YVEnGHukkLrNA2YmthzaU";
+const API_KEY = "AIzaSyAo7626fi4DK5OsZN8_nVm0G12CwtmPBzA";
 
 // const API_KEY="AIzaSyAs2-vpVNYH7dSfUZd73eo09R5Nrmxx4Vs";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
@@ -37,7 +37,7 @@ function loadVideo(videoId) {
  * the below each function used to fetch the API based on the requirement
  */
 
-/**
+/*
  * used to get the VideoDetails
  */
 async function loadVideoDetails(videoId) {
@@ -75,11 +75,11 @@ async function loadChannelInfo(channelId, videoId) {
     const data = await response.json();
     const dataSub = await responseSub.json();
     // console.log("fetch the Subscribe data:",dataSub);
-    console.log("fetch the channel data:", data);
+    // console.log("fetch the channel data:", data);
     if (data.items && dataSub.items) {
       //call the function to display the data
       displayChannelInfo(data.items[0], dataSub.items[0]);
-      console.log("the loadRecommended Videos:", data.items[0].snippet.title);
+      //  console.log("the loadRecommended Videos:", data.items[0].snippet.title);
       // loadRecommendedVideos(data.items[0].snippet.title);
       loadRecommendedVideos(data.items[0].snippet.title, channelId, videoId);
     }
@@ -98,13 +98,13 @@ async function loadVideoStats(videoId) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("fetch the statistics data:", data);
+    // console.log("fetch the statistics data:", data);
     const ArrayStat = [];
     if (data.items) {
       const viewCount = data.items[0].statistics.viewCount;
       const likeCount = data.items[0].statistics.likeCount;
-      console.log("the viewCount:", viewCount);
-      console.log("the likeCount:", likeCount);
+      // console.log("the viewCount:", viewCount);
+      // console.log("the likeCount:", likeCount);
 
       // Call another API using the second API key
       const SnippetResponse = await fetch(
@@ -121,7 +121,7 @@ async function loadVideoStats(videoId) {
       const options = { year: "numeric", month: "long", day: "numeric" };
       const formattedDate = dateObject.toLocaleDateString("en-US", options);
 
-      console.log(`Published on ${formattedDate}`);
+      //console.log(`Published on ${formattedDate}`);
       const title = secondApiData.items[0].snippet.title;
       const description = secondApiData.items[0].snippet.description;
       ArrayStat.push(title, description, viewCount, formattedDate, likeCount);
@@ -159,9 +159,9 @@ function formatSubscriberCount(subscriberCount) {
 }
 
 function displayChannelInfo(channelData, subscriptionData) {
-  console.log("the channel data subscriptions:", channelData);
+  // console.log("the channel data subscriptions:", channelData);
   const channelInfoSection = document.getElementById("channel-info");
-
+  // console.log("the channelData:",channelData);
   // Format the subscriber count
   const formattedSubscriberCount = formatSubscriberCount(
     subscriptionData.statistics.subscriberCount
@@ -177,12 +177,61 @@ function displayChannelInfo(channelData, subscriptionData) {
         </span>
     </div>
     <div>
-        <button>Subscribe</button>
+        <button id="${channelData.snippet.title}">Subscribe</button>
     </div>
 `;
 
   const channelInfoToggle = document.getElementById("channel-info-toggle");
   channelInfoToggle.innerHTML += `<p>${channelData.snippet.description}</p>`;
+}
+
+//index.html let make the img,title to display in the header>col1
+let subscriberarr = [];
+
+document.getElementById("channel-info").addEventListener("click", async (e) => {
+  if (e.target.tagName === "BUTTON") {
+    let object = {};
+    const title = e.target.id;
+    object.title = title;
+    // console.log("the channel name is ", title);
+    // Use the YouTube Data API to fetch channel details based on the video title
+    const apiKey = "AIzaSyDI7xuxOTRzMaDfaecSlpFJfHOKQV04dnk";
+    const apiUrl = `https://www.googleapis.com/youtube/v3/search?q=${title}&key=${apiKey}&part=snippet&type=channel`;
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      // Assuming the first item in the response is the channel
+      const channelDetails = data.items[0].snippet;
+      console.log("Channel Details srinija:", channelDetails);
+      let imgsrc = channelDetails.thumbnails.high.url;
+      object.url = imgsrc;
+      console.log(imgsrc);
+      console.log(object);
+      subscriberarr.push(object);
+    } catch (error) {
+      console.error("Error fetching channel details:", error);
+    }
+  }
+});
+
+// Get the div with the id "Subscriptions"
+const subscriptionsDiv = document.getElementById("Subscriptions");
+console.log(subscriptionsDiv);
+// Check if the div is found
+if (subscriptionsDiv) {
+  // Get the ul element inside the div
+  const ulElement = subscriptionsDiv.querySelector("ul");
+
+  // Check if the ul element is found
+  if (ulElement) {
+    // Get all li elements inside the ul
+    const liElements = ulElement.querySelectorAll("li");
+
+    // Now you can work with the li elements
+    liElements.forEach((li) => {
+      console.log("the liTag", li.innerText); // Log the text content of each li element
+    });
+  }
 }
 
 async function loadComments(videoId) {
@@ -194,7 +243,7 @@ async function loadComments(videoId) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("comments", data);
+    //console.log("comments", data);
     if (data.items) {
       //call the function to display the commets
       displayComments(data.items);
@@ -210,7 +259,7 @@ function displayComments(comments) {
   const h1 = document.getElementById("Comments");
   h1.textContent = comments.length + " Comments";
   const commentSection = document.getElementById("comment-section");
-  console.log("the comment person info:", comments);
+  // console.log("the comment person info:", comments);
   comments.forEach((commentE) => {
     commentSection.innerHTML += `<div id="comment-section1">
         <div class="row1">
@@ -274,8 +323,8 @@ async function loadRecommendedVideos(channelName, channelId) {
     const data = await response.json();
     const data2 = await response2.json();
 
-    console.log("Recommended videos", data);
-    console.log("channel data :", data2);
+    // console.log("Recommended videos", data);
+    // console.log("channel data :", data2);
 
     if (data.items) {
       const recommendedVideos = await Promise.all(
